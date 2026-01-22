@@ -55,3 +55,36 @@ class GenericTreeNode:
     self.value = value
     self.children = []
 
+class GenericTree:
+  """this is is generic tree"""
+  def __init__(self, root_data=None):
+    self.root = GenericTreeNode(root_data) if root_data else None
+    
+  def insert(self, parent, key):
+    """the key is added directly to the parent"""
+    parent_node = self.search(self.root, parent)
+    if parent_node:
+      parent_node.children.append(GenericTreeNode(key))
+    else:
+      print("Parent node does not exists")
+      
+  def search(self, curr, key):
+    '''this will search for the key from the tree'''
+    if curr.value == key:
+      return curr
+    if curr == None:
+      return None
+      
+    for child in curr.children:
+      result = search(curr, child)
+      if result:
+        return result
+    return None
+    
+  def traversal(self, curr, level=0):
+    """will utilize depth first search"""
+    if curr:
+      print(" "*level+"|-- "+str(curr.value))
+      for child in curr.children:
+        self.traversal(child, level+1)
+      
