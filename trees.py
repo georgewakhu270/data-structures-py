@@ -76,7 +76,7 @@ class GenericTree:
       return None
       
     for child in curr.children:
-      result = search(curr, child)
+      result = self.search(curr, child)
       if result:
         return result
     return None
